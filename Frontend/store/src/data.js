@@ -26,7 +26,7 @@ export const categories = [
   {
     id: 1,
     img: 'https://images.pexels.com/photos/24287035/pexels-photo-24287035/free-photo-of-mujer-edificio-pared-muro.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'SHIRT STYLE',
+    title: 'SHIRTS',
   },
   {
     id: 2,
@@ -40,3 +40,38 @@ export const categories = [
   },
 ];
 
+
+export const newProducts = [
+  {
+    id: 1,
+    img: 'https://images.pexels.com/photos/1124465/pexels-photo-1124465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  },
+  {
+    id: 2,
+    img: 'https://images.pexels.com/photos/6764727/pexels-photo-6764727.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  },
+  {
+    id: 3,
+    img: 'https://images.pexels.com/photos/1522381/pexels-photo-1522381.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  },
+  {
+    id: 4,
+    img: 'https://images.pexels.com/photos/428311/pexels-photo-428311.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  },
+  {
+    id: 5,
+    img: 'https://images.pexels.com/photos/844867/pexels-photo-844867.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  },
+  {
+    id: 6,
+    img: 'https://images.pexels.com/photos/19143785/pexels-photo-19143785/free-photo-of-taburete-mujer-sentado-silla.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  },
+  {
+    id: 7,
+    img: 'https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  },
+  {
+    id: 8,
+    img: 'https://images.pexels.com/photos/20197107/pexels-photo-20197107/free-photo-of-hombre-gafas-de-sol-noche-modelo.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  },
+];
