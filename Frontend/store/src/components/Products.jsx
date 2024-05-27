@@ -1,17 +1,32 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { newProducts } from '../data';
 import Product from './Product';
+import axios from 'axios';
 
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 20px;
-  margin-bottom: 20px;
   padding: 20px;
 `;
 
-const Products = () => {
+const Products = ({ cat, filters, sort }) => {
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/api/products');
+        console.log(res);
+      } catch (err) {
+        console.error(err); // It's good to handle errors explicitly
+      }
+    };
+    getProducts();
+  }, [cat]);
+
   return (
     <Container>
       {newProducts.map((item) => (
