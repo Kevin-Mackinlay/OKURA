@@ -3,16 +3,17 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Add, Remove } from '@material-ui/icons';
 import { mobile } from '../responsive';
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { publicRequest } from '../requestMethods';
+import onClick from 'react';
 
-
-const Container = styled.div`
-`;
+const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
-  ${mobile({ padding: "10px", flexDirection: "column" })}
-
+  ${mobile({ padding: '10px', flexDirection: 'column' })}
 `;
 
 const ImgContainer = styled.div`
@@ -23,15 +24,13 @@ const Image = styled.img`
   width: 90%;
   height: 90vh;
   object-fit: cover;
-  ${mobile({ height: "40vh", width: "100%"})}
- 
+  ${mobile({ height: '40vh', width: '100%' })}
 `;
 
 const InfoContainer = styled.div`
   flex: 1;
   padding: 0px 50px;
-  ${mobile({ padding: "10px" })}
-
+  ${mobile({ padding: '10px' })}
 `;
 
 const Title = styled.h1`
@@ -52,8 +51,7 @@ const FilterContainer = styled.div`
   margin: 30px 0px;
   display: flex;
   justify-content: space-between;
-  ${mobile({ width: "100%" })}
-
+  ${mobile({ width: '100%' })}
 `;
 
 const Filter = styled.div`
@@ -87,8 +85,7 @@ const AddContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${mobile({ width: "100%" })}
-
+  ${mobile({ width: '100%' })}
 `;
 
 const AmountContainer = styled.div`
@@ -120,43 +117,74 @@ const Button = styled.button`
   }
 `;
 
-
 const Product = () => {
+  const location = useLocation();
+  const id = location.pathname.split('/')[2];
+
+  const [product, setProducts] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState('');
+  const [size, setSize] = useState('');
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await publicRequest.get('/products/find/' + id);
+        setProducts(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  const handleQuantity = (type) => {
+    if (type === 'dec') {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
+    }
+  };
+  
+  // const handleClick = () => {
+  //   dispatch(addProduct({ ...product, quantity, color, size }));
+  // };
+
   return (
     <Container>
       <Navbar />
       <Wrapper>
         <ImgContainer>
-          <Image src="https://images.pexels.com/photos/6765178/pexels-photo-6765178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+          <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>Jean Jacket</Title>
-          <Desc>This classic jean jacket combines timeless style with modern flair. Crafted from premium denim, it features a versatile light wash, perfect for pairing with both casual and dressy outfits. </Desc>
-          <Price>$ 30</Price>
+          <Title>{product.title}</Title>
+          <Desc>{product.desc}</Desc>
+          <Price>{product.price}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
+              {product.color?.map((c) => (
+                <FilterColor color={c} key={c} onClick={()=>setColor(c)} />
+              ))}
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
+              <FilterSize  onChange={(e) => setSize(e.target.value)} >
+                {product.size?.map((s) => (
+                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                ))}
               </FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
+              <Remove onClick={() => handleQuantity('dec')} />
+              <Amount>{quantity}</Amount>
+              <Add onClick={() => handleQuantity('inc')} />
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleClick}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
