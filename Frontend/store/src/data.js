@@ -5,6 +5,7 @@ export const sliderItems = [
     title: 'JEANS SALE',
     desc: 'Best quality clothes.',
     bg: 'f0f8ff',
+    
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const sliderItems = [
     title: 'SHOES SALE',
     desc: 'Best quality clothes.',
     bg: 'f0f8ff',
+   
   },
   {
     id: 3,
@@ -19,6 +21,7 @@ export const sliderItems = [
     title: 'HATS SALE',
     desc: 'Best quality clothes.',
     bg: 'f0f8ff',
+    
   },
 ];
 
@@ -27,16 +30,19 @@ export const categories = [
     id: 1,
     img: 'https://images.pexels.com/photos/24287035/pexels-photo-24287035/free-photo-of-mujer-edificio-pared-muro.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'SHIRTS',
+    cat: 'women',
   },
   {
     id: 2,
     img: 'https://images.pexels.com/photos/16094250/pexels-photo-16094250/free-photo-of-mano-sujetando-zapatillas-entrenadores.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'SHOES',
+    cat: 'shoes',
   },
   {
     id: 3,
     img: 'https://images.pexels.com/photos/1878821/pexels-photo-1878821.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'HATS',
+    cat: 'man'
   },
 ];
 
