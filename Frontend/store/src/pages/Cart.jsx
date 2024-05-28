@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
@@ -7,6 +7,8 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { mobile } from '../responsive';
 import { useSelector } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
+import { userRequest } from '../requestMethods';
+import { useNavigate } from 'react-router-dom';
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -160,11 +162,32 @@ const Button = styled.button`
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
+  const navigate = useNavigate();
+
   const onToken = (token) => {
     setStripeToken(token);
   };
 
-  console.log(stripeToken)
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest.post('/checkout/payment', {
+          tokenId: stripeToken.id,
+          amount: 500,
+        });
+        navigate('/success', {
+          state: {
+            stripeData: res.data,
+            products: cart.products,
+          },
+        });
+      } catch (error) {
+        console.error('Failed to process payment: ', error);
+      }
+    };
+   if ( stripeToken) makeRequest();
+  }, [stripeToken, cart, navigate]);
+
   return (
     <Container>
       <Navbar />
@@ -229,17 +252,8 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ {cart.totalPrice}</SummaryItemPrice>
             </SummaryItem>
-            
-            <StripeCheckout
-              name="E-COMMERCE"
-              image=""
-              billingAddress
-              shippingAddress
-              description={`Your total is $${cart.totalPrice}`}
-              amount={cart.totalPrice * 100}
-              token={onToken}
-              stripeKey={KEY}
-            >
+
+            <StripeCheckout name="E-COMMERCE" image="" billingAddress shippingAddress description={`Your total is $${cart.totalPrice}`} amount={cart.totalPrice * 100} token={onToken} stripeKey={KEY}>
               <Button>CHECKOUT NOW</Button>
             </StripeCheckout>
           </Summary>
