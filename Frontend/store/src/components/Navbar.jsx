@@ -84,7 +84,7 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>OKARU</Logo>
+          <Logo>OKURA</Logo>
         </Center>
         <Right>
           <MenuItem>REGISTER</MenuItem>
