@@ -47,7 +47,7 @@ export const categories = [
 ];
 
 
-export const newProducts = [
+export const popularProducts = [
   {
     id: 1,
     img: 'https://images.pexels.com/photos/1124465/pexels-photo-1124465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',

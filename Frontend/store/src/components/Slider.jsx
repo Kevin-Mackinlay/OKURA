@@ -33,11 +33,14 @@ const Arrow = styled.div`
   z-index: 2;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div.attrs((props) => ({
+  style: {
+    transform: `translateX(${props.slideIndex * -100}vw)`,
+    transition: 'all 1.5s ease',
+  },
+}))`
   height: 100%;
   display: flex;
-  transition: all 1.5s ease;
-  transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
 const Slide = styled.div`
