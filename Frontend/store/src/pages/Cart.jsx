@@ -1,7 +1,9 @@
-import { Add, Remove } from '@material-ui/icons';
+import React from 'react';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { mobile } from '../responsive';
 
 const Container = styled.div``;
@@ -35,6 +37,7 @@ const TopButton = styled.button`
 const TopTexts = styled.div`
   ${mobile({ display: 'none' })}
 `;
+
 const TopText = styled.span`
   text-decoration: underline;
   cursor: pointer;
@@ -157,7 +160,7 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton> KEEP SHOPPING</TopButton>
+          <TopButton>KEEP SHOPPING</TopButton>
           <TopTexts>
             <TopText>Shopping Bag(2)</TopText>
             <TopText>Your Wishlist(1)</TopText>
@@ -168,7 +171,7 @@ const Cart = () => {
           <Info>
             <Product>
               <ProductDetail>
-                <Image src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                <Image src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="CHIEF SPORTS SHOES" />
                 <Details>
                   <ProductName>CHIEF SPORTS SHOES</ProductName>
                   <ProductId>
@@ -182,17 +185,17 @@ const Cart = () => {
               </ProductDetail>
               <PriceDetail>
                 <ProductAmountContainer>
-                  <Add />
+                  <AddIcon />
                   <ProductAmount>1</ProductAmount>
-                  <Remove />
+                  <RemoveIcon />
                 </ProductAmountContainer>
-                <ProductPrice>$ 80</ProductPrice>
+                <ProductPrice>$80</ProductPrice>
               </PriceDetail>
             </Product>
             <Hr />
             <Product>
               <ProductDetail>
-                <Image src="https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                <Image src="https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="JHONUT BLACK T-SHIRT" />
                 <Details>
                   <ProductName>JHONUT BLACK T-SHIRT</ProductName>
                   <ProductId>
@@ -200,17 +203,17 @@ const Cart = () => {
                   </ProductId>
                   <ProductColor color="black" />
                   <ProductSize>
-                    <b>Size:</b> s
+                    <b>Size:</b> S
                   </ProductSize>
                 </Details>
               </ProductDetail>
               <PriceDetail>
                 <ProductAmountContainer>
-                  <Add />
+                  <AddIcon />
                   <ProductAmount>1</ProductAmount>
-                  <Remove />
+                  <RemoveIcon />
                 </ProductAmountContainer>
-                <ProductPrice>$ 15</ProductPrice>
+                <ProductPrice>$15</ProductPrice>
               </PriceDetail>
             </Product>
           </Info>
@@ -218,19 +221,19 @@ const Cart = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 95</SummaryItemPrice>
+              <SummaryItemPrice>$95</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 10</SummaryItemPrice>
+              <SummaryItemPrice>$10</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>$ -5</SummaryItemPrice>
+              <SummaryItemPrice>$-5</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 100</SummaryItemPrice>
+              <SummaryItemPrice>$100</SummaryItemPrice>
             </SummaryItem>
             <Button>CHECKOUT NOW</Button>
           </Summary>

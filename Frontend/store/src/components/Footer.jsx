@@ -1,5 +1,12 @@
 import styled from 'styled-components';
-import { Email, Facebook, Instagram, Phone, Pinterest, Room, Twitter } from '@material-ui/icons';
+import EmailIcon from '@mui/icons-material/Email';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import PhoneIcon from '@mui/icons-material/Phone';
+import PinterestIcon from '@mui/icons-material/Pinterest';
+import RoomIcon from '@mui/icons-material/Room';
+import TwitterIcon from '@mui/icons-material/Twitter';
+
 import { mobile } from '../responsive';
 
 const Container = styled.div`
@@ -16,12 +23,15 @@ const Left = styled.div`
 `;
 
 const Logo = styled.h1``;
+
 const Desc = styled.p`
   margin: 20px 0;
 `;
+
 const SocialContainer = styled.div`
   display: flex;
 `;
+
 const SocialIcon = styled.div`
   width: 40px;
   height: 40px;
@@ -39,6 +49,7 @@ const Center = styled.div`
   padding: 20px;
   ${mobile({ display: 'none' })}
 `;
+
 const Title = styled.h3`
   margin-bottom: 30px;
 `;
@@ -63,15 +74,14 @@ const Right = styled.div`
 `;
 
 const ContactItem = styled.div`
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 `;
 
 const Payment = styled.img`
-    width: 50%;
+  width: 50%;
 `;
-
 
 const Footer = () => {
   return (
@@ -81,16 +91,16 @@ const Footer = () => {
         <Desc>Okane is a stylish e-commerce platform that offers a curated selection of high-quality, trendy clothing. Committed to sustainable and ethical fashion, Okane provides a seamless shopping experience for fashion-forward individuals looking for style and substance.</Desc>
         <SocialContainer>
           <SocialIcon color="3B5999">
-            <Facebook />
+            <FacebookIcon />
           </SocialIcon>
           <SocialIcon color="E4405F">
-            <Instagram />
+            <InstagramIcon />
           </SocialIcon>
           <SocialIcon color="E60023">
-            <Pinterest />
+            <PinterestIcon />
           </SocialIcon>
           <SocialIcon color="55ACEE">
-            <Twitter />
+            <TwitterIcon />
           </SocialIcon>
         </SocialContainer>
       </Left>
@@ -111,15 +121,15 @@ const Footer = () => {
       <Right>
         <Title>Contact</Title>
         <ContactItem>
-          <Room style={{ marginRight: '10PX' }} />
-          1629 jackson street, Hollywood Florida 33020
+          <RoomIcon style={{ marginRight: '10px' }} />
+          1629 Jackson Street, Hollywood Florida 33020
         </ContactItem>
         <ContactItem>
-          <Phone style={{ marginRight: '10PX' }} />
+          <PhoneIcon style={{ marginRight: '10px' }} />
           +1 954 512 5865
         </ContactItem>
         <ContactItem>
-          <Email style={{ marginRight: '10PX' }} />
+          <EmailIcon style={{ marginRight: '10px' }} />
           kemack83@gmail.com
         </ContactItem>
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
