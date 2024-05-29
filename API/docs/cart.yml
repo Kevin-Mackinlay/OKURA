@@ -1,0 +1,37 @@
+# API/docs/cart.yml
+
+routes:
+  createCart:
+    path: "/api/carts/"
+    method: "POST"
+    description: "Create a new cart."
+    authRequired: "User Authorization"
+
+  updateCart:
+    path: "/api/carts/{id}"
+    method: "PUT"
+    description: "Update an existing cart by its ID."
+    authRequired: "User Authorization"
+
+  deleteCart:
+    path: "/api/carts/{id}"
+    method: "DELETE"
+    description: "Delete a cart by its ID."
+    authRequired: "User Authorization"
+
+  getUserCart:
+    path: "/api/carts/find/{userId}"
+    method: "GET"
+    description: "Retrieve a specific user's cart by user ID."
+    authRequired: "User Authorization"
+
+  getAllCarts:
+    path: "/api/carts/"
+    method: "GET"
+    description: "Retrieve all carts."
+    authRequired: "Admin Authorization"
+
+businessRules:
+  maxItemsAllowed: 50
+  allowBackorder: false
+

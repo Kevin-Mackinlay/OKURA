@@ -1,6 +1,17 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
+const fs = require('fs');
+const yaml = require('js-yaml');
+const path = require('path');
+
+// Load configuration
+const configPath = path.join(__dirname, 'config.yml');
+const configFile = fs.readFileSync(configPath, 'utf8');
+const config = yaml.load(configFile);
+const environment = process.env.NODE_ENV || 'development';
+const settings = config[environment];
+
 const cors = require('cors');
 const express = require('express');
 const app = express();

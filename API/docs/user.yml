@@ -1,0 +1,48 @@
+# API/docs/user.yml
+
+routes:
+  updateUser:
+    path: "/api/users/{id}"
+    method: "PUT"
+    description: "Update an existing user. Encrypts password if it is provided."
+    authRequired: "User Authorization"
+
+  deleteUser:
+    path: "/api/users/{id}"
+    method: "DELETE"
+    description: "Delete a user by its ID."
+    authRequired: "User Authorization"
+
+  getUser:
+    path: "/api/users/find/{id}"
+    method: "GET"
+    description: "Retrieve a specific user by user ID, excludes password in the response."
+    authRequired: "Admin Authorization"
+
+  getAllUsers:
+    path: "/api/users/"
+    method: "GET"
+    description: "Retrieve all users. Supports filtering to return only the newest users."
+    authRequired: "Admin Authorization"
+    filters:
+      new:
+        description: "Return only the newest users, limited to the top 6."
+        type: "Boolean"
+        default: "false"
+
+  getUserStats:
+    path: "/api/users/stats"
+    method: "GET"
+    description: "Get user statistics by month for the last year."
+    authRequired: "Admin Authorization"
+
+security:
+  encryption:
+    password:
+      algorithm: "AES"
+      secret: "PASS_SECRET"
+
+businessRules:
+  newUserDefaultLimit: 6
+
+# Additional configurations or security details can be expanded here.

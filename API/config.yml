@@ -1,0 +1,19 @@
+# API/config.yml
+
+default:
+  port: 5000
+  mongoOptions:
+    useNewUrlParser: true
+    useUnifiedTopology: true
+
+development:
+  mongoUrl: ${MONGO_URL}
+  jwtSecret: ${JWT_SECRET}
+  passSecret: ${PASS_SECRET}
+  stripeKey: ${STRIPE_KEY}
+
+production:
+  mongoUrl: ${MONGO_URL}
+  jwtSecret: ${JWT_SECRET}
+  passSecret: ${PASS_SECRET}
+  stripeKey: ${STRIPE_KEY}

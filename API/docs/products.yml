@@ -1,0 +1,46 @@
+# API/docs/products.yml
+
+routes:
+  createProduct:
+    path: "/api/products/"
+    method: "POST"
+    description: "Create a new product."
+    authRequired: "Admin Authorization"
+
+  updateProduct:
+    path: "/api/products/{id}"
+    method: "PUT"
+    description: "Update an existing product by its ID."
+    authRequired: "Admin Authorization"
+
+  deleteProduct:
+    path: "/api/products/{id}"
+    method: "DELETE"
+    description: "Delete a product by its ID."
+    authRequired: "Admin Authorization"
+
+  getProduct:
+    path: "/api/products/find/{id}"
+    method: "GET"
+    description: "Retrieve a specific product by its ID."
+    authRequired: "None"
+
+  getAllProducts:
+    path: "/api/products/"
+    method: "GET"
+    description: "Retrieve all products. Supports filtering by 'new' and 'category'."
+    authRequired: "None"
+    filters:
+      new:
+        description: "Retrieve the latest products."
+        type: "Boolean"
+        default: "false"
+      category:
+        description: "Filter products by category."
+        type: "String"
+
+businessRules:
+  defaultProductsLimit: 6
+  sortNewProductsBy: "createdAt"
+
+# Additional configurations or business rules can be expanded here.
