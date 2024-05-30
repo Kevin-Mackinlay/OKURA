@@ -1,5 +1,3 @@
-const dotenv = require('dotenv');
-dotenv.config();
 
 const fs = require('fs');
 const yaml = require('js-yaml');
