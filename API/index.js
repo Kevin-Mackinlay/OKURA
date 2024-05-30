@@ -23,11 +23,13 @@ const cartRoute = require('./routes/cart');
 const orderRoute = require('./routes/order');
 const stripeRoute = require('./routes/stripe');
 
+// Define PORT
+const PORT = process.env.PORT || 5000;
 
 console.log('MongoDB URL:', process.env.MONGO_URL);
 console.log('Stripe Key:', process.env.STRIPE_KEY);
 
-//Connect to database
+// Connect to database
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log('Connected to database!'))
@@ -40,7 +42,7 @@ app.use(express.json());
 // Enable CORS for all responses
 app.use(cors());
 
-//Route middleware
+// Route middleware
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
 app.use('/api/products', productRoute);
@@ -59,9 +61,7 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
-
-
-//start server
-app.listen(process.env.PORT || 5000, () => {
-  console.log('Backend server is running!');
+// Start server
+app.listen(PORT, () => {
+  console.log(`Backend server is running on port ${PORT}!`);
 });
