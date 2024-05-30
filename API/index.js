@@ -29,7 +29,7 @@ console.log('Stripe Key:', process.env.STRIPE_KEY);
 
 //Connect to database
 mongoose
-  .connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO_URL)
   .then(() => console.log('Connected to database!'))
   .catch((error) => {
     console.error('Database connection error:', error);
