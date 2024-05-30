@@ -26,9 +26,6 @@ const stripeRoute = require('./routes/stripe');
 // Define PORT
 const PORT = process.env.PORT || 5000;
 
-console.log('MongoDB URL:', process.env.MONGO_URL);
-console.log('Stripe Key:', process.env.STRIPE_KEY);
-
 // Connect to database
 mongoose
   .connect(process.env.MONGO_URL)
