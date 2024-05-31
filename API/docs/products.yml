@@ -1,46 +1,124 @@
-# API/docs/products.yml
+Product:
+  description: Manages product-related functionalities including CRUD operations and listing.
+  schema:
+    ProductSchema:
+      description: Schema representing a product in the catalog.
+      fields:
+        title:
+          type: String
+          required: true
+          unique: true
+          description: Title of the product, must be unique.
+        desc:
+          type: String
+          required: true
+          description: Detailed description of the product.
+        img:
+          type: String
+          required: true
+          description: URL or path to the product image.
+        categories:
+          type: Array
+          description: List of categories the product belongs to.
+        size:
+          type: Array
+          description: Available sizes for the product.
+        color:
+          type: Array
+          description: Available colors for the product.
+        price:
+          type: Number
+          required: true
+          description: Price of the product.
+        inStock:
+          type: Boolean
+          default: true
+          description: Availability status of the product.
+      timestamps: true
 
-routes:
-  createProduct:
-    path: "/api/products/"
-    method: "POST"
-    description: "Create a new product."
-    authRequired: "Admin Authorization"
+  controllers:
+    ProductController:
+      createProduct:
+        description: Create a new product entry.
+        parameters:
+          body:
+            type: Object
+            required: true
+            description: Body content for creating a new product.
+        responses:
+          200:
+            description: Product created successfully.
+          500:
+            description: Internal server error.
+      updateProduct:
+        description: Update details of an existing product.
+        parameters:
+          id:
+            type: String
+            required: true
+            description: Unique identifier of the product to update.
+          body:
+            type: Object
+            description: Body content for updating the product details.
+        responses:
+          200:
+            description: Product updated successfully.
+          500:
+            description: Internal server error.
+      deleteProduct:
+        description: Delete a product.
+        parameters:
+          id:
+            type: String
+            required: true
+            description: Unique identifier of the product to delete.
+        responses:
+          200:
+            description: Product deleted successfully.
+          500:
+            description: Internal server error.
+      getProduct:
+        description: Retrieve a single product by ID.
+        parameters:
+          id:
+            type: String
+            required: true
+            description: Unique identifier of the product to retrieve.
+        responses:
+          200:
+            description: Product retrieved successfully.
+          500:
+            description: Internal server error.
+      getAllProducts:
+        description: Retrieve all products, optionally filtered by newness or category.
+        parameters:
+          newQ:
+            type: Boolean
+            description: Whether to retrieve only the latest products.
+          categoryQ:
+            type: String
+            description: Specific category to filter products.
+        responses:
+          200:
+            description: Products retrieved successfully.
+          500:
+            description: Internal server error.
 
-  updateProduct:
-    path: "/api/products/{id}"
-    method: "PUT"
-    description: "Update an existing product by its ID."
-    authRequired: "Admin Authorization"
+  routes:
+    ProductRoutes:
+      basePath: /api/products
+      endpoints:
+        POST /:
+          description: Create a new product.
+          authRequired: verifyTokenAndAdmin
+        PUT /:id:
+          description: Update a specific product.
+          authRequired: verifyTokenAndAdmin
+        DELETE /:id:
+          description: Delete a specific product.
+          authRequired: verifyTokenAndAdmin
+        GET /find/:id:
+          description: Get a specific product.
+        GET /:
+          description: Get all products, with optional parameters for filtering.
 
-  deleteProduct:
-    path: "/api/products/{id}"
-    method: "DELETE"
-    description: "Delete a product by its ID."
-    authRequired: "Admin Authorization"
-
-  getProduct:
-    path: "/api/products/find/{id}"
-    method: "GET"
-    description: "Retrieve a specific product by its ID."
-    authRequired: "None"
-
-  getAllProducts:
-    path: "/api/products/"
-    method: "GET"
-    description: "Retrieve all products. Supports filtering by 'new' and 'category'."
-    authRequired: "None"
-    filters:
-      new:
-        description: "Retrieve the latest products."
-        type: "Boolean"
-        default: "false"
-      category:
-        description: "Filter products by category."
-        type: "String"
-
-businessRules:
-  defaultProductsLimit: 6
-  sortNewProductsBy: "createdAt"
-
-# Additional configurations or business rules can be expanded here.
