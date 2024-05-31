@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { mobile } from '../responsive';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100vw;
@@ -46,18 +47,26 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+    const navigate = useNavigate(); // useNavigate for redirection
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // Dummy functionality: navigate to '/login' upon form submission
+    // In real scenario, submit these values to your backend here
+    navigate('/login');
+  }
   return (
     <Container>
       <Wrapper>
         <Title>CREATE YOUR ACCOUNT</Title>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Input placeholder="name" />
           <Input placeholder="last name" />
           <Input placeholder="username" />
           <Input placeholder="email" />
           <Input placeholder="password" />
           <Input placeholder="confirm password" />
-          <Button>CREATE </Button>
+          <Button type='submit'>CREATE </Button>
         </Form>
       </Wrapper>
     </Container>
