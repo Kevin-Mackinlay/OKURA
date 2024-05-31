@@ -87,8 +87,8 @@ const Footer = () => {
   return (
     <Container>
       <Left>
-        <Logo>OKANE</Logo>
-        <Desc>Okane is a stylish e-commerce platform that offers a curated selection of high-quality, trendy clothing. Committed to sustainable and ethical fashion, Okane provides a seamless shopping experience for fashion-forward individuals looking for style and substance.</Desc>
+        <Logo>OKURA</Logo>
+        <Desc>Okura is a stylish e-commerce platform that offers a curated selection of high-quality, trendy clothing. Committed to sustainable and ethical fashion, Okane provides a seamless shopping experience for fashion-forward individuals looking for style and substance.</Desc>
         <SocialContainer>
           <SocialIcon color="3B5999">
             <FacebookIcon />

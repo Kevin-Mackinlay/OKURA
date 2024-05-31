@@ -5,10 +5,11 @@ import Navbar from '../components/Navbar';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { mobile } from '../responsive';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
 import { userRequest } from '../requestMethods';
 import { useNavigate } from 'react-router-dom';
+import { removeProduct } from '../redux/cartRedux';
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -154,7 +155,7 @@ const SummaryItemPrice = styled.span``;
 const Button = styled.button`
   width: 100%;
   padding: 10px;
-  background-color: darkgrey;
+  background-color: darkorange;
   color: white;
   font-weight: 600;
 `;
@@ -163,6 +164,7 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onToken = (token) => {
     setStripeToken(token);
@@ -188,13 +190,17 @@ const Cart = () => {
    if ( stripeToken) makeRequest();
   }, [stripeToken, cart, navigate]);
 
+  const handleRemove = (id) => {
+    dispatch(removeProduct({id}));
+  }
+
   return (
     <Container>
       <Navbar />
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>KEEP SHOPPING</TopButton>
+          <TopButton onClick={()=> navigate('/')}>KEEP SHOPPING</TopButton>
           <TopTexts>
             <TopText>Shopping Bag(2)</TopText>
             <TopText>Your Wishlist(1)</TopText>
@@ -226,7 +232,7 @@ const Cart = () => {
                   <ProductAmountContainer>
                     <AddIcon />
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <RemoveIcon />
+                    <RemoveIcon onClick={() => handleRemove(product._id)} style={{ cursor: 'pointer' }} />
                   </ProductAmountContainer>
                   <ProductPrice>$ {product.price * product.quantity}</ProductPrice>
                 </PriceDetail>

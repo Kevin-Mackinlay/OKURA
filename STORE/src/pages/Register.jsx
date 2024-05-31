@@ -19,6 +19,14 @@ const Wrapper = styled.div`
   ${mobile({ width: '75%' })}
 `;
 
+const BackArrow = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+  cursor: pointer;
+`;
+
 const Title = styled.h1`
   font-size: 20px;
   font-weight: 300;
@@ -49,6 +57,12 @@ const Button = styled.button`
 const Register = () => {
     const navigate = useNavigate(); // useNavigate for redirection
 
+
+    const handleBack = () => {
+      navigate('/'); // Navigate back to the homepage
+    };
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Dummy functionality: navigate to '/login' upon form submission
@@ -58,6 +72,7 @@ const Register = () => {
   return (
     <Container>
       <Wrapper>
+        <BackArrow onClick={handleBack}>&larr;</BackArrow>
         <Title>CREATE YOUR ACCOUNT</Title>
         <Form onSubmit={handleSubmit}>
           <Input placeholder="name" />
@@ -66,7 +81,7 @@ const Register = () => {
           <Input placeholder="email" />
           <Input placeholder="password" />
           <Input placeholder="confirm password" />
-          <Button type='submit'>CREATE </Button>
+          <Button type="submit">CREATE </Button>
         </Form>
       </Wrapper>
     </Container>
