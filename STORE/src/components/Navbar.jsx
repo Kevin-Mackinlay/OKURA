@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import Badge from '@mui/material/Badge';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { mobile } from '../responsive';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { logoutUser } from '../userActions'; // Make sure this path is correct
+import { persistor } from '../redux/store';
 
 const Container = styled.div`
   height: 60px;
@@ -71,31 +73,66 @@ const MenuItem = styled.div`
   ${mobile({ fontSize: '12px', marginLeft: '10px' })}
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none; // Removes underline
+  color: inherit; // Ensures the color inherits from the parent element
+`;
+
 const Navbar = () => {
-  const quantity = useSelector(state => state.cart.quantity);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const quantity = useSelector((state) => state.cart.quantity);
+  const user = useSelector((state) => state.user.currentUser); // Fetch current user status
+
+  const handleLogout = () => {
+    console.log('Dispatching logout action');
+    dispatch(logoutUser());
+    persistor
+      .purge()
+      .then(() => {
+        console.log('Persistor purged');
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error('Failed to purge persistor:', error);
+      });
+  };
+
   return (
     <Container>
       <Wrapper>
         <Left>
           <Language>EN</Language>
           <SearchContainer>
-            <Input placeholder="Search" />
+            <Input id="search" placeholder="Search" />
             <SearchIcon style={{ color: 'gray', fontSize: 16 }} />
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>OKURA</Logo>
+          <StyledLink to="/">
+            <Logo>OKURA</Logo>
+          </StyledLink>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
-           <Link to="/cart">
-          <MenuItem>
-            <Badge badgeContent={quantity} color="primary">
-              <ShoppingCartOutlinedIcon />
-            </Badge>
-          </MenuItem>
-        </Link>
+          {user ? (
+            <MenuItem onClick={handleLogout}>LOGOUT</MenuItem>
+          ) : (
+            <>
+              <Link to="/register">
+                <MenuItem>REGISTER</MenuItem>
+              </Link>
+              <Link to="/login">
+                <MenuItem>SIGN IN</MenuItem>
+              </Link>
+            </>
+          )}
+          <Link to="/cart">
+            <MenuItem>
+              <Badge badgeContent={quantity} color="primary">
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+            </MenuItem>
+          </Link>
         </Right>
       </Wrapper>
     </Container>
