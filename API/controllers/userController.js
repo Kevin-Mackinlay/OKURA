@@ -71,3 +71,26 @@ exports.getUserStats = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+exports.uploadProfileImage = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'No file uploaded' });
+  }
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: { profileImg: req.file.path }, // Assuming 'profileImg' is the field in your User model
+      },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: 'Profile image uploaded successfully!',
+      user: user,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Failed to update profile image', error: err });
+  }
+};
