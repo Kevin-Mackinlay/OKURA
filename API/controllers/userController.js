@@ -44,6 +44,7 @@ exports.getUser = async (req, res) => {
     const { password, ...others } = user._doc;
     res.status(200).json(others);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 };
@@ -55,6 +56,7 @@ exports.getAllUsers = async (req, res) => {
     const users = query ? await User.find().sort({ _id: -1 }).limit(5) : await User.find();
     res.status(200).json(users);
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 };
