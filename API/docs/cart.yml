@@ -1,103 +1,145 @@
-Cart:
-  description: Manages shopping cart functionalities for users including CRUD operations and listing.
-  schema:
-    CartSchema:
-      description: Schema representing a user's shopping cart.
-      fields:
-        userId:
-          type: String
+openapi: 3.0.0
+info:
+  title: Cart API
+  version: 1.0.0
+  description: API documentation for the Cart endpoints
+
+paths:
+  /api/carts:
+    post:
+      summary: Create a cart
+      tags:
+        - Carts
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cart'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '500':
+          description: Server error
+    get:
+      summary: Get all carts
+      tags:
+        - Carts
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cart'
+        '500':
+          description: Server error
+
+  /api/carts/{id}:
+    put:
+      summary: Update a cart
+      tags:
+        - Carts
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
           required: true
-          description: Unique identifier for the user owning this cart.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cart'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '500':
+          description: Server error
+    delete:
+      summary: Delete a cart
+      tags:
+        - Carts
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Server error
+
+  /api/carts/find/{userId}:
+    get:
+      summary: Get a user's cart
+      tags:
+        - Carts
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cart'
+        '500':
+          description: Server error
+
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: string
+        userId:
+          type: string
         products:
-          type: Array
-          description: Array of products in the cart.
+          type: array
           items:
-            productId:
-              type: String
-              description: Unique identifier of the product.
-            quantity:
-              type: Number
-              default: 1
-              description: Quantity of the product.
-      timestamps: true
-
-  controllers:
-    CartController:
-      createCart:
-        description: Create a new cart with initial products.
-        parameters:
-          body:
-            type: Object
-            required: true
-            description: Body content to create a new cart.
-        responses:
-          200:
-            description: Cart created successfully.
-          500:
-            description: Internal server error.
-      updateCart:
-        description: Update an existing cart.
-        parameters:
-          id:
-            type: String
-            required: true
-            description: Unique identifier of the cart to update.
-          body:
-            type: Object
-            description: Body content for updating the cart.
-        responses:
-          200:
-            description: Cart updated successfully.
-          500:
-            description: Internal server error.
-      deleteCart:
-        description: Delete a cart.
-        parameters:
-          id:
-            type: String
-            required: true
-            description: Unique identifier of the cart to delete.
-        responses:
-          200:
-            description: Cart deleted successfully.
-          500:
-            description: Internal server error.
-      getUserCart:
-        description: Retrieve a specific user's cart.
-        parameters:
-          userId:
-            type: String
-            required: true
-            description: Unique identifier of the user whose cart is to be retrieved.
-        responses:
-          200:
-            description: User cart retrieved successfully.
-          500:
-            description: Internal server error.
-      getAllCarts:
-        description: Retrieve all carts in the system.
-        responses:
-          200:
-            description: All carts retrieved successfully.
-          500:
-            description: Internal server error.
-
-  routes:
-    CartRoutes:
-      basePath: /api/carts
-      endpoints:
-        POST /:
-          description: Create a new cart.
-          authRequired: verifyTokenAndAuthorization
-        PUT /:id:
-          description: Update a specific cart.
-          authRequired: verifyTokenAndAuthorization
-        DELETE /:id:
-          description: Delete a specific cart.
-          authRequired: verifyTokenAndAuthorization
-        GET /find/:userId:
-          description: Get a specific user's cart.
-          authRequired: verifyTokenAndAuthorization
-        GET /:
-          description: Get all carts.
-          authRequired: verifyTokenAndAdmin
+            type: object
+            properties:
+              productId:
+                type: string
+              quantity:
+                type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
