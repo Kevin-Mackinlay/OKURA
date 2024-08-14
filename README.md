@@ -1,8 +1,8 @@
 
-# Okaru
+# Okura
 
 ## Description
-Okaru is a modern e-commerce platform designed to provide a seamless shopping experience. Built with React, Node.js, and Redux, Okaru offers robust features to enhance user interaction and simplify transactions with integrated Stripe payments and JWT for secure authentication.
+Okura is a modern e-commerce platform designed to provide a seamless shopping experience. Built with React, Node.js, and Redux, Okaru offers robust features to enhance user interaction and simplify transactions with integrated Stripe payments and JWT for secure authentication.
 
 ## Key Features
 - User-friendly interface with responsive design.
